@@ -1,0 +1,5 @@
+- hosts: cengines
+  become: yes
+  roles:
+    - nodejs_install
+    - nginx_install
