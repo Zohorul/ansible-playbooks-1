@@ -3,3 +3,4 @@
   roles:
     - nodejs_install
     - nginx_install
+    - pm2_install

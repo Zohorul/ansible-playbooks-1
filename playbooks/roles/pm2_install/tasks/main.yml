@@ -1,0 +1,7 @@
+- name: install pm2
+  npm:
+    name: pm2
+    global: yes
+    version: latest
+- name: pm2 startup
+  shell: pm2 startup
