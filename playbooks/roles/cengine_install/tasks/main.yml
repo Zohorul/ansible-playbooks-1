@@ -1,0 +1,32 @@
+- name: create ssl directory
+  file:
+    path: /etc/nginx/ssl
+    state: directory
+- name: copy nginx ssl files
+  copy:
+    src: {{item}}
+    dest: /etc/nginx/ssl/{{item}}
+    force: yes
+    with_items: forkcdn.crt, forkcdn.key
+- name: copy nginx default site configuration
+  copy:
+    src: nginx_default_site_conf
+    dest: /etc/nginx/sites-available/default
+    force: yes
+  notify: reload nginx
+- name: link nginx default site configuration to sites-enabled
+  file:
+    src: /etc/nginx/sites-available/default
+    dest: /etc/nginx/sites-enabled/default
+    force: yes
+    state: link
+- name: ufw allow port 80
+  ufw:
+    rule: allow
+    port: 80
+    proto: tcp
+- name: ufw allow port 443
+  ufw:
+    rule: allow
+    port: 443
+    proto: tcp
