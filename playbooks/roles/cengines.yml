@@ -4,4 +4,4 @@
     - nodejs_install
     - nginx_install
     - pm2_install
-    - cengine_install
+    - cengine_setup

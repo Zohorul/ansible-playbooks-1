@@ -6,6 +6,13 @@ Ansible Playbooks for various deployments in Fork Media
 
 * Ansible playbooks for various deployments
 
+### Available Roles ###
+
+* Nginx installation
+* Nodejs installation
+* PM2 installation
+* Environment setup for Contextual Engine applciation deployment
+
 ### How do I get set up? ###
 
 * Install Ansible
