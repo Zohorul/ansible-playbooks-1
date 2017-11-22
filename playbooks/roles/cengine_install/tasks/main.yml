@@ -4,10 +4,12 @@
     state: directory
 - name: copy nginx ssl files
   copy:
-    src: {{item}}
-    dest: /etc/nginx/ssl/{{item}}
+    src: '{{ item }}'
+    dest: '/etc/nginx/ssl/{{item}}'
     force: yes
-    with_items: forkcdn.crt, forkcdn.key
+    with_items:
+      - forkcdn.crt
+      - forkcdn.key
 - name: copy nginx default site configuration
   copy:
     src: nginx_default_site_conf
