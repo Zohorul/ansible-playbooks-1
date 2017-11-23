@@ -34,3 +34,9 @@
     rule: allow
     port: 443
     proto: tcp
+- name: copy id_rsa for bitbucket access
+  copy:
+    src: id_rsa
+    dest: /home/ubuntu/.ssh/id_rsa
+    mode: 0400
+    force: yes
