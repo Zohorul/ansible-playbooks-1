@@ -8,10 +8,10 @@
     dest: '{{ item.dest }}'
     force: yes
   with_items:
-    - src: forkcdn.crt
-      dest: /etc/nginx/ssl/forkcdn.crt
-    - src: forkcdn.key
-      dest: /etc/nginx/ssl/forkcdn.key
+    - src: ssl.crt
+      dest: /etc/nginx/ssl/ssl.crt
+    - src: ssl.key
+      dest: /etc/nginx/ssl/ssl.key
 - name: copy nginx default site configuration
   copy:
     src: nginx_default_site_conf

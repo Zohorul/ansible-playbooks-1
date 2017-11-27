@@ -1,6 +1,6 @@
 # README #
 
-Ansible Playbooks for various deployments in Fork Media
+Ansible Playbooks for various deployments
 
 ### What is this repository for? ###
 
@@ -11,16 +11,16 @@ Ansible Playbooks for various deployments in Fork Media
 * Nginx installation
 * Nodejs installation
 * PM2 installation
-* Environment setup for Contextual Engine applciation deployment
+* Environment setup for NodeJS application deployment
 
 ### How do I get set up? ###
 
 * Install Ansible
 * Set up hosts
-* git clone https://bitbucket.org/forkmedia/ansible-playbooks.git
+* git clone https://github.com/krish512/ansible-playbooks.git
 * cd ansible-playbooks/playbooks/roles/
-* ansible-playbook cengines.yml -K
+* ansible-playbook node_app.yml -K
 
 ### Who do I talk to? ###
 
-* `Krishna Modi <krishna@forkmedia.in>`
+* `Krishna Modi <krish512@hotmail.com>`

@@ -9,10 +9,10 @@ server {
 
 	index index.html index.htm index.nginx-debian.html;
 
-	server_name cengine.forkcdn.com;
+	server_name nodeapp.krish512.com;
 
-	ssl_certificate /etc/nginx/ssl/forkcdn.crt;
-	ssl_certificate_key /etc/nginx/ssl/forkcdn.key;
+	ssl_certificate /etc/nginx/ssl/ssl.crt;
+	ssl_certificate_key /etc/nginx/ssl/ssl.key;
 
 	ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
 	ssl_prefer_server_ciphers on;
