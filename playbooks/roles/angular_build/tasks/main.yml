@@ -1,0 +1,9 @@
+- name: NPM Install
+  npm:
+    path: "{{project_path}}"
+
+- name: Angular Build
+  shell: ng build
+  args:
+    chdir: "{{project_path}}"
+    executable: /bin/bash

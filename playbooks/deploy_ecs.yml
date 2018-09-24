@@ -1,0 +1,23 @@
+---
+- name: Deploy Angular Web App on ECS
+  hosts: local
+  vars:
+    aws_region: "ap-south-1"
+    env: "production"
+    project_name: "angular-web"
+    project_path: "~/Project/{{project_name}}"
+    infra_repo_path: "~/Project/configs/docstat_web/docker"
+    image_name: "angular_web"
+    dockerfile_path: "{{project_path}}"
+    max_memory: 500
+    desired_count: 2
+    port_mapping:
+    - containerPort: 80
+      hostPort: 0
+    targetGroupArn: "arn:aws:elasticloadbalancing:ap-south-1:1234567890:targetgroup/tg-production-angular-web/1234567890"
+  roles:
+  - git_pull
+  - copy_docker_configs
+  - angular_build
+  - ecr_build_image
+  - ecs_deploy_container

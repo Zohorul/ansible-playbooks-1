@@ -1,0 +1,21 @@
+- name: EC2 Create Container Instance
+  ec2:
+    region: "{{aws_region}}"
+    key_name: kp-level-0
+    instance_type: t2.large
+    image: "{{image_id}}"
+    vpc_subnet_id: "{{subnet_id}}"
+    group: sg-dev-stage-internal
+    instance_profile_name: AmazonEC2ContainerServiceforEC2Role
+    instance_tags:
+      Environment: "{{env}}"
+      Project: "Infrastructure"
+      Team: "DevOps"
+      Name: "ec2-{{env}}-container_host_{{ansible_date_time.epoch}}"
+      Role: "Docker"
+    user_data: |
+      #!/bin/bash
+      echo ECS_CLUSTER=cluster-production >> /etc/ecs/ecs.config
+    wait: yes
+    state: present
+  register: ec2_output

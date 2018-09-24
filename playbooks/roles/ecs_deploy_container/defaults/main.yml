@@ -1,0 +1,9 @@
+---
+aws_region: "ap-south-1"
+max_memory: 4000
+env: "development"
+desired_count: 1
+task_role_arn: "arn:aws:iam::1234567890:role/TaskExecutionRolePolicy"
+port_mapping:
+- containerPort: 80
+  hostPort: 8080

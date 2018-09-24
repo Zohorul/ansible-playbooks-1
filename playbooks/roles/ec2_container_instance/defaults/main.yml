@@ -1,0 +1,4 @@
+---
+aws_region: ap-south-1
+env: development
+image_id: "ami-056a07eb5b1d13734"

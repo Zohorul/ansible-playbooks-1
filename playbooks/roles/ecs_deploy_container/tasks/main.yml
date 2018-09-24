@@ -1,0 +1,56 @@
+- name: ECS Taskdefinition
+  ecs_taskdefinition:
+    containers:
+    - name: "{{ image_name }}"
+      essential: true
+      image: "{{ image_uri }}"
+      memory: "{{ max_memory }}"
+      portMappings: "{{ port_mapping }}"
+    family: td-{{ env }}-{{ image_name }}
+    task_role_arn: "{{ task_role_arn }}"
+    state: present
+  register: taskdefinition_output
+
+- name: ECS Cluster
+  ecs_cluster:
+    name: cluster-{{ env }}
+    state: present
+  register: cluster_output
+
+- name: Set Fact Taskdefinition, Cluster and Load Balancers
+  set_fact:
+    task_definition_name: "{{ taskdefinition_output.taskdefinition.family }}"
+    cluster_name: "{{ cluster_output.cluster.clusterName }}"
+    load_balancers: 
+    - containerName: "{{ image_name }}"
+      containerPort: "{{ port_mapping[0].containerPort | int | default(80) }}"
+      targetGroupArn: "{{ targetGroupArn }}"
+
+- name: Get ECS Service Details
+  ecs_service_facts:
+    cluster: "{{ cluster_name }}"
+    service: cs-{{ env }}-{{ image_name }}
+    details: true
+  register: service_output
+
+- name: Set Fact Service Load Balancers
+  set_fact:
+    load_balancers: "{{ service_output.services[0].loadBalancers }}"
+  when: service_output.services | count
+
+- name: ECS Service
+  ecs_service:
+    name: cs-{{ env }}-{{ image_name }}
+    cluster: "{{ cluster_name }}"
+    task_definition: "{{ task_definition_name }}"
+    desired_count: "{{ desired_count | default(2) }}"
+    load_balancers: "{{ load_balancers }}"
+    deployment_configuration:
+      minimum_healthy_percent: "{{ app_minimum_healthy | default( 50 ) }}"
+      maximum_percent: "{{ app_maximum_percent | default( 200 ) }}"
+    placement_strategy:
+    - type: spread
+      field: attribute:ecs.availability-zone
+    - type: spread
+      field: instanceId
+    state: present

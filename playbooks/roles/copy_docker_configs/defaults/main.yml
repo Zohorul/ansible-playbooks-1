@@ -1,0 +1,2 @@
+---
+infra_repo_path: "~/Project/configs/{{project_name}}/docker"

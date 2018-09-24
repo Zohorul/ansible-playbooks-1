@@ -1,0 +1,3 @@
+---
+infra_repo_path: "~/Project/ansible/roles/"
+roles_path: "/etc/ansible/roles/"

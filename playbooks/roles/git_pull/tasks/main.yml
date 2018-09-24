@@ -1,0 +1,5 @@
+- name: GIT PULL Project Repository
+  git:
+    repo: "ssh://git@bitbucket.org/team/{{project_name}}.git"
+    dest: "{{project_path}}"
+    force: true

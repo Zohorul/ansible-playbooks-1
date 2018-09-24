@@ -1,0 +1,5 @@
+---
+image_name: "unnamed-{{ansible_date_time.epoch}}"
+dockerfile_path: "./"
+aws_region: ap-south-1
+env: development

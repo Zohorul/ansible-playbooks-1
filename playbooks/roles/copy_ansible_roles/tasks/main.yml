@@ -1,0 +1,6 @@
+- name: Copy Ansible Roles
+  synchronize:
+    src: "{{infra_repo_path}}/"
+    dest: "{{roles_path}}"
+    recursive: yes
+    times: no

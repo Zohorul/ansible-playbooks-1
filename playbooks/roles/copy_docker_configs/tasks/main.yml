@@ -1,0 +1,6 @@
+- name: Copy Dockerfile
+  synchronize:
+    src: "{{infra_repo_path}}/"
+    dest: "{{project_path}}"
+    recursive: yes
+    times: no

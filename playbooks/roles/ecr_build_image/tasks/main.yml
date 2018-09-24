@@ -1,0 +1,24 @@
+- name: ECR Login
+  shell: "$(aws ecr get-login --no-include-email --region {{aws_region}})"
+
+- name: ECR repo present
+  ecs_ecr:
+    name: "{{image_name}}"
+  register: repo_output
+
+- name: Build and push image to ECR
+  docker_image:
+    state: present
+    force: true
+    path: "{{dockerfile_path}}"
+    name: "{{image_name}}"
+    tag: "{{tag | default(omit)}}"
+    repository: "{{repo_output.repository.repositoryUri | default(omit)}}"
+    push: yes
+    buildargs:
+      listen_port: 80
+  register: image_output
+
+- name: Set Fact Image_URI
+  set_fact:
+    image_uri: "{{image_output.image.RepoTags[0]}}"
