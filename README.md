@@ -11,6 +11,11 @@ Ansible Playbooks for various deployments
 * Nginx installation
 * Nodejs installation
 * PM2 installation
+* ECR setup and image push
+* ECS setup and deployment
+* Angular app build
+* GIT pull
+* EC2 container instance creation
 * Environment setup for NodeJS application deployment
 
 ### How do I get set up? ###
